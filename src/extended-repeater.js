@@ -35,7 +35,7 @@ function plusAddition(addition, additionRepeatTimes, additionSeparator) {
   if (!additionRepeatTimes && typeof additionSeparator !== 'number') return addition;
   for (let i = 1; i <= additionRepeatTimes; i++) {
     if (!additionSeparator) {
-      additionSeparator = '|'
+      additionSeparator = '|';
     }
     i < additionRepeatTimes
       ? resAddition = resAddition + addition + additionSeparator
