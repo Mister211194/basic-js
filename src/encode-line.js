@@ -15,18 +15,16 @@ function encodeLine(str) {
   const items = [...str];
   let res = '';
   let val = 1;
-  for (let i = 0; i < items.length; i++) {
+  items.forEach((item, i) => {
     if (items[i] === items[i + 1]) {
       val += 1;
     } else {
-      if (val === 1) {
-        res = res + items[i];
-      } else {
-        res = res + `${val}${items[i]}`
-      }
-      val = 1
+      val === 1
+        ? res = res + items[i]
+        : res = res + `${val}${items[i]}`;
+      val = 1;
     }
-  }
+  })
   return res;
 }
 
