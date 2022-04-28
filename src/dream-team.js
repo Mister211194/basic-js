@@ -23,6 +23,7 @@ function createDreamTeam(members) {
   })
   console.log(res)
   return res.sort().join('')
+  // time 219ms
 }
 
 module.exports = {
