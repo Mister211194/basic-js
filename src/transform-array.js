@@ -41,7 +41,7 @@ function transform(arr) {
     }
   })
 
-  return res.filter(item => item !== null);
+  return res.filter(item => item);
 }
 
 module.exports = {
