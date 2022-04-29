@@ -25,7 +25,7 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function minesweeper(matrix) {
   const clone = JSON.parse(JSON.stringify(matrix));
-  const res = clone.map(element => element.map(item => item = 0));
+  const res = clone.map(element => element.fill(0));
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix[i].length; j++) {
       if (matrix[i - 1]) {
