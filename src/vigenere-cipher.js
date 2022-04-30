@@ -40,11 +40,22 @@ class VigenereCipheringMachine {
       return mess[idx];
     } else {
       const summ = this._code.indexOf(mess[idx]) + this._code.indexOf(key[idx])
-      return summ > 26 ? summ - 26 : summ
+      return summ >= 26 ? summ - 26 : summ
+    }
+  }
+
+  _summIndexDecode(mess, key, idx) {
+    if (!mess[idx].match(/[a-zA-Z]/g)) {
+      return mess[idx];
+    } else {
+      const summ = this._code.indexOf(mess[idx]) - this._code.indexOf(key[idx]);
+      return summ < 0 ? summ + 26 : summ
     }
   }
 
   encrypt(mess, key) {
+    if (!mess || !key) throw new Error('Incorrect arguments!');
+
     key = this._keyLength(mess, key);
     mess = mess.toUpperCase()
     let res = [];
@@ -61,9 +72,23 @@ class VigenereCipheringMachine {
   }
 
   decrypt(mess, key) {
+    if (!mess || !key) throw new Error('Incorrect arguments!');
+    key = this._keyLength(mess, key);
+    mess = mess.toUpperCase()
+    let res = [];
+    for (let i = 0; i < mess.length; i++) {
+      if (!mess[i].match(/[a-zA-Z]/g)) key = key.slice(0, i) + ' ' + key.slice(i);
+      res.push(this._summIndexDecode(mess, key, i))
+    }
 
+    res = res.map(item => typeof item === 'number'
+      ? this._code[item]
+      : item).join('');
+
+    return this._type ? res : res.split('').reverse().join("");
   }
 }
+
 
 module.exports = {
   VigenereCipheringMachine
