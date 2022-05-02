@@ -23,17 +23,24 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function getDNSStats(domains) {
-  const obj = {}
+  //Создаем объект куда будем складывать результат
+  const objResult = {}
+  //Обходим входящий массив
   domains.forEach((domain) => {
-    const arr = domain.split('.');
+    // каждый ключ(строку) разбиваем на массив
+    const arr = domain.split('.').reverse();
+    // Переменная, куда записываем новый ключ.
     let key = '';
-    for (let i = arr.length - 1; i >= 0;) {
+    // Цикл для обхода кажлго ключа входящщего массива(но каждый ключ это уже тоже массив+перевернут)
+    for (let i = 0; i < arr.length;) {
+      //Ключ равен например сразу music
       key = key + `.${arr[i]}`;
-      obj[key] ? ++obj[key] : obj[key] = 1;
-      i--;
+      // проверяем есть ли ключ в объекте, если есть то делаем +1, если нет то создаем его со значением 1
+      objResult[key] ? ++objResult[key] : objResult[key] = 1;
+      i++;
     }
   })
-  return obj
+  return objResult
 }
 
 module.exports = {
